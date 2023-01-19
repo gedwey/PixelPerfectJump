@@ -30,6 +30,11 @@ jobs:
         env:
           DOTNET_CLI_TELEMETRY_OUTPUT: true
 
+      - name: Download Dalamud
+        run: |
+          Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/net7/latest.zip -OutFile latest.zip
+          Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"
+
       - name: Create artifact
         run: |
           Compress-Archive -Path "bin/*" -DestinationPath PixelPerfectJump.zip
