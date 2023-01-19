@@ -24,8 +24,8 @@
     "IconUrl": "https://raw.githubusercontent.com/gedwey/PixelPerfectJump/master/images/icon.png",
     "Punchline": "Reveals your hitbox, with customisable features.",
     "AcceptsFeedback": true,
-    "DownloadLinkInstall": "https://github.com/gedwey/PixelPerfectJump/releases/download/refs%2Fheads%2Fmain/PixelPerfectJump.zip",
-    "DownloadLinkTesting": "https://github.com/gedwey/PixelPerfectJump/releases/download/refs%2Fheads%2Fmain/PixelPerfectJump.zip",
-    "DownloadLinkUpdate": "https://github.com/gedwey/PixelPerfectJump/releases/download/refs%2Fheads%2Fmain/PixelPerfectJump.zip"
+    "DownloadLinkInstall": "https://github.com/gedwey/PixelPerfectJump/releases/download/v0.1337/PixelPerfectJump.zip",
+    "DownloadLinkTesting": "https://github.com/gedwey/PixelPerfectJump/releases/download/v0.1337/PixelPerfectJump.zip",
+    "DownloadLinkUpdate": "https://github.com/gedwey/PixelPerfectJump/releases/download/v0.1337/PixelPerfectJump.zip"
   }
 ]
