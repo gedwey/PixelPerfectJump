@@ -1,12 +1,11 @@
 name: Build
 
 on:
-  create:
-    tags:
-    - "*"
   workflow_dispatch:
   push:
     branches: [main]
+    tags:
+    - '*'
   pull_request:
     branches: [main]
 
@@ -49,7 +48,6 @@ jobs:
           path: PixelPerfectJump.zip
           if-no-files-found: error
 
-    steps:
       - name: Checkout repo
         uses: actions/checkout@v2.2.0
         with:
