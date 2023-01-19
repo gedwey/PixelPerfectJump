@@ -9,13 +9,9 @@
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
-        <ErrorReport>none</ErrorReport>
-        <Title>PixelPerfectJump</Title>
-        <RepositoryUrl>https://github.com/gedwey/PixelPerfectJump</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-    </PropertyGroup>
+	<PropertyGroup>
+		<DalamudLibPath>$(AppData)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+	</PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <Optimize>False</Optimize>
