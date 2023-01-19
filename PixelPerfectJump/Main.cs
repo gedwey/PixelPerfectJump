@@ -79,8 +79,6 @@ namespace PixelPerfect
             doodleBag = _configuration.DoodleBag;
             if(doodleBag.Count==0 ) { _firstTime = true; }
 
-            
-
             //update popup
             if(_configuration.Version < _version)
             {
@@ -107,7 +105,6 @@ namespace PixelPerfect
             doodleJobs = new String[21] { "All", "PLD", "WAR", "DRK", "GNB", "WHM", "SCH", "AST", "SGE", "MNK", "DRG", "NIN", "SAM", "RPR", "BRD", "MCH", "DNC", "BLM", "SMN", "RDM", "BLU" };
             doodleJobsUint = new uint[21] { 0, 19, 21, 32, 37, 24, 28, 33, 40, 20, 22, 30, 34, 39, 23, 31, 38, 25, 27, 35, 36 };
             
-
             editorScale = 4f;
             selected = -1;
 
