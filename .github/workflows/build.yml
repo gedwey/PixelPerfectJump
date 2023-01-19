@@ -27,7 +27,7 @@ jobs:
 
       - name: Download Dalamud
         run: |
-          Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/net5/latest.zip -OutFile dalamudlatest.zip
+          Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/net7/latest.zip -OutFile dalamudlatest.zip
           Expand-Archive -Force dalamudlatest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"
 
       - name: Build
