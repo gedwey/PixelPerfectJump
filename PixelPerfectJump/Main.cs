@@ -236,7 +236,7 @@ namespace PixelPerfect
         public int Type { get; set; } = 2;
         public Vector4 Colour { get; set; } = new Vector4(1f, 1f, 1f, 1f);
         public bool North { get; set; } = true;
-        public float Thickness { get; set; } = 10f;
+        public float Thickness { get; set; } = 1f;
         public int Segments { get; set; } = 100;
         public float Radius { get; set; } = 2f;
          public Vector4 Vector { get; set; } = new Vector4( -2f, 0f, 0f, 0f);
@@ -247,7 +247,9 @@ namespace PixelPerfect
         public bool Outline { get; set; } = false;
         public Vector4 OutlineColour { get; set; } = new Vector4(1f, 1f, 1f, 1f);
         public HashSet<Vector3> TrackingDots = new HashSet<Vector3>();
-        public bool Pause { get; set; } = false;    
+        public bool Pause { get; set; } = false;  
+        
+        public bool HidePath { get; set; } = false;
     }
 
 

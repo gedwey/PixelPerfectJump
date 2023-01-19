@@ -142,28 +142,14 @@ namespace PixelPerfect
                         doodle.TrackingDots.Add(new Vector3(actor.Position.X, actor.Position.Y, actor.Position.Z));
                     }
                     
-                    foreach (Vector3 p in doodle.TrackingDots)
-                    {
-                        _gui.WorldToScreen(
-                            new Vector3(p.X + xOff, p.Y, p.Z + yOff),
-                            out var pos);
+                    if (!doodle.HidePath) {
+                        foreach (Vector3 p in doodle.TrackingDots)
+                        {
+                            _gui.WorldToScreen(
+                                new Vector3(p.X + xOff, p.Y, p.Z + yOff),
+                                out var pos);
 
-                        if (doodle.Outline)
-                        {
-                            ImGui.GetWindowDrawList().AddCircle(
-                                new Vector2(pos.X, pos.Y),
-                                doodle.Radius + doodle.Thickness * 0.6f,
-                                ImGui.GetColorU32(doodle.OutlineColour),
-                                doodle.Segments, doodle.Thickness);
-                        }
-
-                        if (doodle.Filled)
-                        {
-                            ImGui.GetWindowDrawList().AddCircleFilled(new Vector2(pos.X, pos.Y), doodle.Radius, ImGui.GetColorU32(doodle.Colour), doodle.Segments);
-                        }
-                        else
-                        {
-                            ImGui.GetWindowDrawList().AddCircle(new Vector2(pos.X, pos.Y), doodle.Radius, ImGui.GetColorU32(doodle.Colour), doodle.Segments, doodle.Thickness);
+                            ImGui.GetWindowDrawList().AddCircleFilled(new Vector2(pos.X, pos.Y), doodle.Radius + doodle.Thickness, ImGui.GetColorU32(doodle.Colour), doodle.Segments);
                         }
                     }
                 }

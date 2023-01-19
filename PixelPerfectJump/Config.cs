@@ -128,7 +128,8 @@ namespace PixelPerfect
                         var type = doodle.Type;
                         var colour = doodle.Colour;
                         var north = doodle.North;
-                        var pause = doodle.Pause;       
+                        var pause = doodle.Pause;
+                        var hidePath = doodle.HidePath;
                         var thickness = doodle.Thickness;
                         var segments = doodle.Segments;
                         var vector = doodle.Vector;
@@ -215,12 +216,8 @@ namespace PixelPerfect
                         if (type == 3)//tracker
                         {
                             ImGui.Checkbox($"Pause tracking", ref pause);
-                            if (ImGui.Button($"Clear tracker"))
-                            {
-                                doodle.TrackingDots.Clear();
-                            }
-                            ImGui.SameLine();
-                            if (ImGui.Button($"Copy tracking CSV"))
+                            ImGui.Checkbox($"Hide path", ref hidePath);
+                            if (ImGui.Button($"Copy path CSV"))
                             {
                                 var csv = new StringBuilder();
                                 foreach (Vector3 p in doodle.TrackingDots)
@@ -228,7 +225,11 @@ namespace PixelPerfect
                                     csv.AppendLine(string.Format("{0},{1},{2}", p.X, p.X, p.Z));
                                 }
                                 ImGui.SetClipboardText(csv.ToString());
-                                ToastGui.ShowNormal("Copied!");
+                                ToastGui.ShowNormal("Copied path!");
+                            }
+                            if (ImGui.Button($"!!! CLEAR PATH !!!"))
+                            {
+                                doodle.TrackingDots.Clear();
                             }
                         }
                         ImGui.PopItemWidth();
@@ -236,6 +237,7 @@ namespace PixelPerfect
                         doodle.Colour = colour;
                         doodle.North = north;
                         doodle.Pause = pause;
+                        doodle.HidePath = hidePath;
                         if (thickness < 0f) { thickness = 0f; }
                         doodle.Thickness = thickness;
                         if (segments > 1000) { segments = 1000; }
@@ -273,16 +275,6 @@ namespace PixelPerfect
                 ImGui.PushStyleColor(ImGuiCol.Button, 0xFF000000 | 0x005E5BFF);
                 ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0xDD000000 | 0x005E5BFF);
                 ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0xAA000000 | 0x005E5BFF);
-
-                if (ImGui.Button("Buy Haplo a Hot Chocolate"))
-                {
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "https://ko-fi.com/haplo",
-                        UseShellExecute = true
-                    });
-                }
-
                 ImGui.PopStyleColor(3);
                 ImGui.PopStyleVar();
                 ImGui.End();
