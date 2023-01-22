@@ -246,10 +246,32 @@ namespace PixelPerfect
         public bool Offset { get; set; } = false;
         public bool Outline { get; set; } = false;
         public Vector4 OutlineColour { get; set; } = new Vector4(1f, 1f, 1f, 1f);
-        public HashSet<Vector3> TrackingDots = new HashSet<Vector3>();
-        public bool Pause { get; set; } = false;  
-        
+        public HashSet<TimedVector3> TrackingDots = new HashSet<TimedVector3>();        public bool Pause { get; set; } = false;
         public bool HidePath { get; set; } = false;
+        public bool EnableGhost { get; set; } = false;
+        public DateTime ghostRecordReplayStartTime { get; set; } = DateTime.MinValue;
+        public int ghostRecordReplayCountdownSeconds { get; set; } = 5;
+    }
+
+    public class TimedVector3
+    {
+        public float X { get; private set; }
+        public float Y { get; private set; }
+        public float Z { get; private set; }
+        public double timeOffset { get; private set; }
+        private Vector3 vector;
+        public TimedVector3(float X, float Y, float Z, double timeOffset) {
+            this.X = X;
+            this.Y = Y;
+            this.Z = Z;
+            vector = new Vector3(X, Y, Z);
+            this.timeOffset = timeOffset;
+        }
+
+        public Vector3 asVector()
+        {
+            return vector;
+        }
     }
 
 

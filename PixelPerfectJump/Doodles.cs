@@ -139,17 +139,25 @@ namespace PixelPerfect
                     }
 
                     if (!doodle.Pause) {
-                        doodle.TrackingDots.Add(new Vector3(actor.Position.X, actor.Position.Y, actor.Position.Z));
+                        if (doodle.ghostRecordReplayStartTime != DateTime.MinValue)
+                        {
+                            doodle.TrackingDots.Add(new TimedVector3(actor.Position.X, actor.Position.Y, actor.Position.Z, (DateTime.Now - doodle.ghostRecordReplayStartTime).TotalMilliseconds));
+                        }
+                        else
+                        {
+                            doodle.TrackingDots.Add(new TimedVector3(actor.Position.X, actor.Position.Y, actor.Position.Z, -1));
+                        }
                     }
                     
                     if (!doodle.HidePath) {
-                        foreach (Vector3 p in doodle.TrackingDots)
+                        foreach (TimedVector3 p in doodle.TrackingDots)
                         {
-                            _gui.WorldToScreen(
+                            if (p.timeOffset == -1 || (DateTime.Now - doodle.ghostRecordReplayStartTime).TotalMilliseconds >= p.timeOffset) {
+                                _gui.WorldToScreen(
                                 new Vector3(p.X + xOff, p.Y, p.Z + yOff),
                                 out var pos);
-
-                            ImGui.GetWindowDrawList().AddCircleFilled(new Vector2(pos.X, pos.Y), doodle.Radius + doodle.Thickness, ImGui.GetColorU32(doodle.Colour), doodle.Segments);
+                                ImGui.GetWindowDrawList().AddCircleFilled(new Vector2(pos.X, pos.Y), doodle.Radius + doodle.Thickness, ImGui.GetColorU32(doodle.Colour), doodle.Segments);
+                            }
                         }
                     }
                 }

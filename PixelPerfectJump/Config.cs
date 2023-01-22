@@ -12,11 +12,37 @@ using ImGuiNET;
 using System.Numerics;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace PixelPerfect
 {
     public partial class PixelPerfect : IDalamudPlugin
     {
+        public async Task StartTimer(int seconds, CancellationToken cancellationToken)
+        {
+            var tOpts = new Dalamud.Game.Gui.Toast.QuestToastOptions();
+            tOpts.DisplayCheckmark = true;
+            await Task.Run(async () =>
+            {
+                while (true)
+                {
+                    if (seconds <= 0)
+                    {
+                        ToastGui.ShowQuest("Go!", tOpts);
+                        break;
+                    } else
+                    {
+                        ToastGui.ShowQuest(seconds.ToString());
+                    }
+                    seconds -= 1;
+                    await Task.Delay(1000, cancellationToken);
+                    if (cancellationToken.IsCancellationRequested)
+                        break;
+                }
+            });
+
+        }
         private void DrawConfig()
         {
             if (_firstTime && !_bitch)
@@ -130,6 +156,7 @@ namespace PixelPerfect
                         var north = doodle.North;
                         var pause = doodle.Pause;
                         var hidePath = doodle.HidePath;
+                        var enableGhost = doodle.EnableGhost;
                         var thickness = doodle.Thickness;
                         var segments = doodle.Segments;
                         var vector = doodle.Vector;
@@ -217,12 +244,39 @@ namespace PixelPerfect
                         {
                             ImGui.Checkbox($"Pause tracking", ref pause);
                             ImGui.Checkbox($"Hide path", ref hidePath);
+                            if (!hidePath)
+                            {
+                                ImGui.SameLine();
+                                ImGui.Checkbox($"Enable Ghost", ref enableGhost);
+                            }
+                            if (enableGhost)
+                            {
+                                if (ImGui.Button($"Record ghost"))
+                                {
+                                    // Set record start time in future
+                                    doodle.ghostRecordReplayStartTime = DateTime.Now.AddSeconds(doodle.ghostRecordReplayCountdownSeconds);
+                                    // Start 5 second timer
+                                    CancellationToken ct = new CancellationToken();
+                                    StartTimer(doodle.ghostRecordReplayCountdownSeconds, ct);
+                                    doodle.TrackingDots.Clear();
+                                    doodle.Pause = false;
+                                }
+                                if (ImGui.Button($"Replay ghost"))
+                                {
+                                    // Set replay start time in future
+                                    doodle.ghostRecordReplayStartTime = DateTime.Now.AddSeconds(doodle.ghostRecordReplayCountdownSeconds);
+                                    // Start 5 second timer
+                                    CancellationToken ct = new CancellationToken();
+                                    StartTimer(doodle.ghostRecordReplayCountdownSeconds, ct);
+                                    doodle.Pause = true;
+                                }
+                            }
                             if (ImGui.Button($"Copy path CSV"))
                             {
                                 var csv = new StringBuilder();
-                                foreach (Vector3 p in doodle.TrackingDots)
+                                foreach (TimedVector3 p in doodle.TrackingDots)
                                 {
-                                    csv.AppendLine(string.Format("{0},{1},{2}", p.X, p.X, p.Z));
+                                    csv.AppendLine(string.Format("{0},{1},{2},{3}", p.X, p.X, p.Z,p.timeOffset));
                                 }
                                 ImGui.SetClipboardText(csv.ToString());
                                 ToastGui.ShowNormal("Copied path!");
@@ -238,6 +292,7 @@ namespace PixelPerfect
                         doodle.North = north;
                         doodle.Pause = pause;
                         doodle.HidePath = hidePath;
+                        doodle.EnableGhost = enableGhost;
                         if (thickness < 0f) { thickness = 0f; }
                         doodle.Thickness = thickness;
                         if (segments > 1000) { segments = 1000; }
@@ -309,5 +364,5 @@ namespace PixelPerfect
                 }
             }
         }
-        }
+    }
 }
