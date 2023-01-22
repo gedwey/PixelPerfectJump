@@ -2,7 +2,7 @@
   "Author": "Haplo064, forked by Gedwey",
   "Name": "Pixel Perfect Jump",
   "InternalName": "PixelPerfectJump",
-  "AssemblyVersion": "0.0.0.1",
+  "AssemblyVersion": "0.0.0.4",
   "Description": "Showing exactly where to stand since 2023 kinda.",
   "ApplicableVersion": "any",
   "RepoUrl": "https://github.com/gedwey/PixelPerfectJump",
