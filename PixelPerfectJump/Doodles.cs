@@ -152,7 +152,7 @@ namespace PixelPerfect
                     if (!doodle.HidePath) {
                         foreach (TimedVector3 p in doodle.TrackingDots)
                         {
-                            if (p.timeOffset == -1 || (DateTime.Now - doodle.ghostRecordReplayStartTime).TotalMilliseconds >= p.timeOffset) {
+                            if (!doodle.EnableGhost || p.timeOffset == -1 || (DateTime.Now - doodle.ghostRecordReplayStartTime).TotalMilliseconds >= p.timeOffset) {
                                 _gui.WorldToScreen(
                                 new Vector3(p.X + xOff, p.Y, p.Z + yOff),
                                 out var pos);
