@@ -45,7 +45,7 @@ jobs:
 
       - name: Create artifact
         run: |
-          sudo 7z a /tmp/bin/* /tmp/PixelPerfectJump.zip
+          sudo 7z a /tmp/PixelPerfectJump.zip /tmp/bin/*
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
