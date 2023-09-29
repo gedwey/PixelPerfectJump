@@ -20,8 +20,8 @@ jobs:
 
       - name: Install deps
         run: |
-          sudo apt update
-          sudo apt install curl git build-essential
+          sudo apt update -y
+          sudo apt install -y curl git build-essential
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
