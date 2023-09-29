@@ -21,7 +21,7 @@ jobs:
       - name: Install deps
         run: |
           sudo apt update -y
-          sudo apt install -y curl git build-essential p7zip-full
+          sudo apt install -y curl git build-essential p7zip-full wget
           sudo mkdir /usr/share/dotnet
           sudo chmod 777 /usr/share/dotnet
           
@@ -32,7 +32,7 @@ jobs:
 
       - name: Download Dalamud
         run: |
-          curl -o /tmp/latest.zip https://goatcorp.github.io/dalamud-distrib/net7/latest.zip
+          wget https://goatcorp.github.io/dalamud-distrib/net7/latest.zip -O /tmp/latest.zip
           7z x /tmp/latest.zip /tmp/dalamud
           ls -alR /tmp/
           rm /tmp/latest.zip
