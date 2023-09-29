@@ -24,13 +24,11 @@ jobs:
           sudo apt install -y curl git build-essential
           sudo mkdir /usr/share/dotnet
           sudo chmod 777 /usr/share/dotnet
-          sudo mkdir -p /home/runner/_work/PixelPerfectJump/PixelPerfectJump
-
+          
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.x'
-          cache: true
 
       - name: Download Dalamud
         run: |
