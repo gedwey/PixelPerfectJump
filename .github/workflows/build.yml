@@ -18,12 +18,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install deps
+        run: |
+          apt install curl
+
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: | 
-            3.1.x
-            5.0.x
+          dotnet-version: '6.x'
+          cache: true
 
       - name: Download Dalamud
         run: |
