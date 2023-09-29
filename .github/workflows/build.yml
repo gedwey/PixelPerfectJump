@@ -34,7 +34,7 @@ jobs:
         run: |
           curl -o latest.zip https://goatcorp.github.io/dalamud-distrib/net7/latest.zip
           7z x latest.zip dalamud
-          ls -al dalamud
+          ls -alR dalamud
           rm latest.zip
 
       - name: Build
