@@ -20,7 +20,7 @@ jobs:
 
       - name: Install deps
         run: |
-          apt install curl
+          sudo apt install curl
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
