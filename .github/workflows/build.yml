@@ -33,7 +33,7 @@ jobs:
       - name: Download Dalamud
         run: |
           wget https://goatcorp.github.io/dalamud-distrib/net7/latest.zip -O /tmp/latest.zip
-          7z x -o /tmp/dalamud /tmp/latest.zip
+          7z x -o/tmp/dalamud /tmp/latest.zip
           ls -alR /tmp/
           rm /tmp/latest.zip
 
