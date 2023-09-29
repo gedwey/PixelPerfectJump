@@ -10,7 +10,7 @@
     </PropertyGroup>
 
 	<PropertyGroup>
-		<DalamudLibPath>dalamud\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+		<DalamudLibPath>/tmp/dalamud/XIVLauncher/addon/Hooks/dev/</DalamudLibPath>
 	</PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
