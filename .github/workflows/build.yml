@@ -32,21 +32,21 @@ jobs:
 
       - name: Download Dalamud
         run: |
-          curl -o latest.zip https://goatcorp.github.io/dalamud-distrib/net7/latest.zip
-          7z x latest.zip dalamud
-          ls -alR dalamud
-          rm latest.zip
+          curl -o /tmp/latest.zip https://goatcorp.github.io/dalamud-distrib/net7/latest.zip
+          7z x /tmp/latest.zip /tmp/dalamud
+          ls -alR .
+          rm /tmp/latest.zip
 
       - name: Build
         run: |
           dotnet restore
-          dotnet build --configuration Release --nologo --output bin/
+          dotnet build --configuration Release --nologo --output /tmp/bin/
         env:
           DOTNET_CLI_TELEMETRY_OUTPUT: true
 
       - name: Create artifact
         run: |
-          7z a bin/* PixelPerfectJump.zip
+          7z a /tmp/bin/* /tmp/PixelPerfectJump.zip
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -54,4 +54,4 @@ jobs:
           automatic_release_tag: "latest"
           prerelease: false
           title: "Release"
-          files: PixelPerfectJump.zip
+          files: /tmp/PixelPerfectJump.zip
