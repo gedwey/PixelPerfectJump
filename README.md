@@ -1,3 +1,5 @@
+> This project is unmaintained.
+
 ### Add this URL to Dalamud repo list to get access to PixelPerfectJump:
 https://raw.githubusercontent.com/gedwey/PixelPerfectJump/main/PixelPerfectJump/repo.json
 
